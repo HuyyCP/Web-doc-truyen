@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from environ import Env
+
+env = Env()
+env.read_env('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-mrqxbci=^0e!a((t^ahbte+*@4+q%l-(mz-22jq$*dd603%gu3"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,12 +88,12 @@ WSGI_APPLICATION = "webdoctruyen.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "webdoctruyen",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",        
-        "USER": "root",
-        "PASSWORD": "root"
+        "ENGINE": env('DATABASE_ENGINE'),
+        "HOST": env('DATABASE_HOST'),
+        "NAME": env('DATABASE_NAME'),
+        "PORT": env('DATABASE_PORT'),        
+        "USER": env('DATABASE_USER'),
+        "PASSWORD": env('DATABASE_PASSWORD')
     }
 }
 
@@ -116,9 +120,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = env('LANGUAGE_CODE')
 
-TIME_ZONE = "UTC"
+TIME_ZONE = env('TIME_ZONE')
 
 USE_I18N = True
 
