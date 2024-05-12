@@ -47,13 +47,13 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container list-chapter">
     <div class="row">
         <table class="table table-striped">
             <tbody>
                 {% for chapter in chapters %}
                 <tr>
-                    <th><a href="/manga/{{ manga.slug }}/chapter-{{ chapter.index }}">Chapter {{ chapter.index }}. {{ chapter.title }} </a></th>
+                    <th><a href="/manga/{{ manga.slug }}/chapter-{{ chapter.index }}">Chapter {{ chapter.index }} </a></th>
                     <td class="text-muted text-uppercase float-right">{{ chapter.uploadTime }}</td>
                 </tr>
                 {% endfor %}
@@ -63,7 +63,9 @@
 </div>
 
 
-
-
+<script type="text/javascript" src="{% static 'js/pagination.js' %}"></script>
+<script>
+    renderPagination('{{ totalChapter }}', '{{ pageNum }}', '/manga/{{ manga.slug }}/page')
+</script>
 {% endblock %}
 

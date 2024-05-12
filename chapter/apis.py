@@ -3,8 +3,8 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
 class ChapterAPI:
-    def getChaptersByManga(self, manga_id):
-        data = Chapter.objects.filter(manga_id=manga_id).order_by('index')
+    def getChaptersByManga(self, manga_id, offset, limit):
+        data = Chapter.objects.filter(manga_id=manga_id).order_by('index')[offset:offset+limit]
         return data
     
     def getChapterByIndex(self, manga_id, index): 
@@ -26,5 +26,8 @@ class ChapterAPI:
         }
         return chapter
 
+    def getNumOfChapterByManga(self, manga_id):
+        data = Chapter.objects.filter(manga_id=manga_id).count()
+        return data
 
 chapterAPI = ChapterAPI()

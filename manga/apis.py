@@ -9,6 +9,8 @@ class MangaAPI:
     def getMangaBySlug(self, slug):
         data = Manga.objects.get(slug=slug)
         return data
+    
+    
 
 mangaAPI = MangaAPI()
     
