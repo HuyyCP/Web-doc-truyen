@@ -20,6 +20,10 @@ class MangaAPI:
         data = Manga.objects.get(slug=slug)
         return data
     
+    def getMangaByUploader(self, uploader):
+        data = Manga.objects.filter(uploader=uploader)
+        return data
+
     def createManga(self, title, avatar, author, genres, description):
         slug = slugify(title)
         if isinstance(avatar, InMemoryUploadedFile):
