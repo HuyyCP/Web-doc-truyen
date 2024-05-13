@@ -24,7 +24,7 @@ from main.views import home_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include('chapter.urls'), name='chapter'),
+    path("", include('chapter.urls')),
     path("", home_view, name='home'),
-    path("manga/", include('manga.urls'), name='manga'),
+    path("manga/", include('manga.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

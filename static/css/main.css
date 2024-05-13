@@ -331,3 +331,7 @@ footer {
 }
 
 /* end footer */
+
+.hidden {
+    display:none
+}
