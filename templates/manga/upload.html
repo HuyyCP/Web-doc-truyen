@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Upload manga</title>
+{% endblock %}
+
+{% block content %}
+<div class="p-5">
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="form-group container">
+            <div class="row">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </div>
+            <div class="row">
+                {{ form.avatarInput.label_tag }}
+                {{ form.avatarInput }}
+            </div>
+            <img width="200" class="mb-4 hidden" src="" id="avatarPreview">
+            <div class="row">
+                {{ form.author.label_tag }}
+                {{ form.author }}
+            </div>
+            <div class="row">
+                {{ form.genres.label_tag }}
+                {{ form.genres }}
+            </div>
+            <div class="row">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<!-- <script src="https://cdn.tiny.cloud/1/3eu37wok75co8wurx0fr06a9gk6y8x9x9m1z1xj8f72de8u5/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
+
+<script>
+//     tinymce.init({
+//         selector: 'textarea#id_description',
+//         plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+//         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+//         tinycomments_mode: 'embedded',
+//         tinycomments_author: 'Author name',
+//         mergetags_list: [
+//         { value: 'First.Name', title: 'First Name' },
+//         { value: 'Email', title: 'Email' },
+//         ],
+//         ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+//   });
+
+    const imgInput = document.querySelector("#id_avatarInput")
+    const displayImg = document.querySelector("#avatarPreview")
+    imgInput.addEventListener('change', () => {
+        displayImg.src = URL.createObjectURL(imgInput.files[0])
+        displayImg.classList.remove('hidden');
+    })
+
+</script>
+{% endblock %}

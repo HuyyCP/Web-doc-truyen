@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{ manga.title }} - chapter {{ chapter.info.index }}</title>
+{% endblock %}
+{% block content %}
+<h1>{{ manga.title }} - chapter {{ chapter.info.index }}</h1>
+
+<div style="text-align: center;">
+    {% for page in chapter.pages %}
+    <img style="width: 50vw;" src="{{ page.link }}" alt="{{ page.name }}">
+    {% endfor %}
+</div>
+{% endblock %}

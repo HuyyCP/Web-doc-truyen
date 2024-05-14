@@ -9,3 +9,6 @@ class Genre(models.Model):
     def save(self):
         self.slug = slugify(self.title)
         super().save()
+
+    def __str__(self):
+        return self.genreName

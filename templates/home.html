@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Manga Reader</title>
+{% endblock %}
+
+{% block content %}
+<table border=''> 
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Uploader</th>
+        <th>Author</th>
+        <th>Genres</th>
+    </tr>
+    {% for manga in mangas %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="/manga/{{ manga.slug }}">{{ manga.title }}</a></td>
+            <td>{{ manga.uploader }}</td>
+            <td>{{ manga.author.authorName }}</td>
+            <td>{% for genre in manga.genres.all %} {{ genre.genreName }} {% endfor %}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
