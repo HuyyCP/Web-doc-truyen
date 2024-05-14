@@ -1,0 +1,14 @@
+django-environ
+image
+six
+django
+mysqlclient
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
+pillow
+crispy-bootstrap4
+django-crispy-forms
+django-tinymce
+django-recaptcha
