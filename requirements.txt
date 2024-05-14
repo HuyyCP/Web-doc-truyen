@@ -12,3 +12,4 @@ crispy-bootstrap4
 django-crispy-forms
 django-tinymce
 django-recaptcha
+fontawesomefree
