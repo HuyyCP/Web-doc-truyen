@@ -17,11 +17,14 @@
         <div class="col">
             <span>Title</span>
         </div>
+        <div class="col">
+            <span>Total chapter</span>
+        </div>
         <div class="col-2">
             <span>Control</span>
         </div>
     </div>
-    {% for manga in mangas %}
+    {% for manga, totalChapter in data %}
         <div class="row my-2">
             <div class="col-1">
                 <span>{{ forloop.counter }}</span>
@@ -31,10 +34,15 @@
                     {{ manga.title }}
                 </span>
             </div>
+            <div class="col">
+                <span>
+                    {{ totalChapter }}
+                </span>
+            </div>
             <div class="col-2">
-                <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
-                <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                <a href="/manga/{{ manga.slug }}/add-chapter" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                <a href="/manga/{{ manga.slug }}/edit" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                <a href="/manga/{{ manga.id }}/delete" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
             </div>
         </div>
     {% endfor %}

@@ -36,13 +36,18 @@ class MangaView:
                 mangaAPI.createManga(title, avatar, author, genres, description)
             else: 
                 print(form.errors)
-            return redirect('home')
+            return redirect('manage')
         else:
             form = UploadMangaForm()
             context = {
                 'form': form
             }
             return render(request, 'manga/upload.html', context)
-        
+    
+    def editManga(self, request, slug):
+        print()
+
+    def deleteManga(self, request, id):
+        print()
      
 mangaView = MangaView()

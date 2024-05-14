@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from manga.apis import mangaAPI
-
+from chapter.apis import chapterAPI
 
 class MainView:
     def home_view(self, request):
@@ -12,8 +12,11 @@ class MainView:
     
     def manageView(self, request):
         mangas = mangaAPI.getMangaByUploader(request.user)
+        totalChapters = []
+        for manga in mangas:
+            totalChapters.append(chapterAPI.getNumOfChapterByManga(manga.id))
         context = {
-            'mangas': mangas
+            'data': zip(mangas, totalChapters),
         }
         return render(request, 'manage.html', context)
     

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>{{ manga.title }}</title>
+{% endblock %}
+
+{% block content %}
+<form id="add-chapter-form" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="form-group container mt-4 g-3">
+        <div class="row">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+        <div class="row">
+            <label for="pagesInput">Pages</label>
+            <input id="pagesInput" name="files" class="form-control" type="file" accept="image/*" multiple>
+        </div>
+        <div class="row mt-3">
+            <div class="container" id="pagesPreview">
+                
+            </div>
+        </div>
+        <div class="row mt-3">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    files = []
+
+    pagesInput = document.getElementById('pagesInput')
+    pagesPreview = document.getElementById('pagesPreview')
+    pagesInput.addEventListener('input', () => {
+        for (i = 0; i < pagesInput.files.length; i++) {
+            files.push(pagesInput.files[i])
+            image = document.createElement('img')
+            image.width=180
+            image.height=250
+            image.classList.add('m-3')
+            image.src = URL.createObjectURL(pagesInput.files[i])
+            pagesPreview.appendChild(image)
+        }
+    })
+
+
+    form = document.getElementById('add-chapter-form')
+    form.addEventListener('submit', (e) => {
+        console.log(files)
+        e.preventDefault()
+        var formData = new FormData()
+        formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+        formData.append('title', document.getElementById('id_title').value)
+        for(i = 0; i < files.length; i++) {
+            formData.append('files[]', files[i])
+        }
+        fetch("/manga/{{ manga.slug }}/add-chapter", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            console.log('Add chapter successfully')
+            console.log(response)
+            window.location.href = '/manage'
+        })
+        .catch(error => {
+            console.log(error)
+            window.location.href = '/manage'
+        });
+    })
+    
+</script>
+{% endblock %}
