@@ -1,6 +1,11 @@
 from .models import Chapter
+from django.db.models import Max
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
+from utils.handleDrive import create_folder_in_drive, upload_file_to_drive
+import tempfile
+
 
 class ChapterAPI:
     def getChaptersByManga(self, manga_id, offset, limit):
@@ -29,5 +34,27 @@ class ChapterAPI:
     def getNumOfChapterByManga(self, manga_id):
         data = Chapter.objects.filter(manga_id=manga_id).count()
         return data
+    
+    def addChapter(self, title, files, manga):
+        max_index = Chapter.objects.filter(manga=manga).aggregate(Max('index'))
+        chapter_index = max_index['index__max'] + 1 if max_index['index__max'] is not None else 1
+        chapter_folder_id = create_folder_in_drive(str(chapter_index), manga.idDrive)
+        for index, file in enumerate(files, start=1):
+            if isinstance(file, InMemoryUploadedFile):
+                with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                    temp_file.write(file.read())
+                    file_path = temp_file.name
+            elif isinstance(file, TemporaryUploadedFile):
+                file_path = file.temporary_file_path()
+
+            upload_file_to_drive(file_path, chapter_folder_id, str(index))
+        
+        chapter = Chapter.objects.create(
+            title=title,
+            index=chapter_index,
+            manga=manga,
+            idDrive=chapter_folder_id
+        )
+        chapter.save()
 
 chapterAPI = ChapterAPI()

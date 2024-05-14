@@ -2,6 +2,9 @@ from django.urls import path
 from manga.views import mangaView
 
 urlpatterns = [
-    path('<slug:slug>', mangaView.getMangaBySlug, name='manga_detail'),
-    path('<slug:slug>/page-<int:pageNum>', mangaView.getMangaBySlugAndPage, name='manga_page'),
+    path('upload', mangaView.uploadMangaView, name='uploadManga'),
+    path('<slug:slug>', mangaView.getMangaBySlug),
+    path('<slug:slug>/page-<int:pageNum>', mangaView.getMangaBySlugAndPage),
+    path('<slug:slug>/edit', mangaView.editManga, name='edit-manga'),
+    path('<int:id>/delete', mangaView.deleteManga, name='delete-manga'),
 ]
