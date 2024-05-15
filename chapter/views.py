@@ -12,7 +12,7 @@ class ChapterView:
             'chapter': chapter 
         }
         return render(request, 'chapter/chapter.html', context)
-
+    
     def addChapter(self, request, slug):
         manga = mangaAPI.getMangaBySlug(slug)
         if request.method == 'POST':

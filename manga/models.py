@@ -2,6 +2,7 @@ from django.db import models
 from genre.models import Genre
 from author.models import Author
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 class Manga(models.Model):
     title       = models.CharField(max_length=100, null=False, blank=False)
@@ -13,5 +14,7 @@ class Manga(models.Model):
     author      = models.ForeignKey(Author, on_delete=models.DO_NOTHING)
     genres      = models.ManyToManyField(Genre)
 
-
+    # def save(self, *args, **kwargs):
+    #     super.save(*args, **kwargs)
+    #     slug = slugify(self.title)
  

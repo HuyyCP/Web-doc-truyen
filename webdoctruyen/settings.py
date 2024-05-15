@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # third party
 
     # own
+    "main",
     "user",
     "genre",
     "chapter",

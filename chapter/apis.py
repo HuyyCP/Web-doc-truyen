@@ -39,7 +39,7 @@ class ChapterAPI:
         max_index = Chapter.objects.filter(manga=manga).aggregate(Max('index'))
         chapter_index = max_index['index__max'] + 1 if max_index['index__max'] is not None else 1
         chapter_folder_id = create_folder_in_drive(str(chapter_index), manga.idDrive)
-        for index, file in enumerate(files, start=1):
+        for index, file in enumerate(files):
             if isinstance(file, InMemoryUploadedFile):
                 with tempfile.NamedTemporaryFile(delete=False) as temp_file:
                     temp_file.write(file.read())
