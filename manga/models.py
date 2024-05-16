@@ -16,5 +16,7 @@ class Manga(models.Model):
     author      = models.ForeignKey(Author, on_delete=models.DO_NOTHING)
     genres      = models.ManyToManyField(Genre)
 
-
+    # def save(self, *args, **kwargs):
+    #     super.save(*args, **kwargs)
+    #     slug = slugify(self.title)
  

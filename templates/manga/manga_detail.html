@@ -11,20 +11,20 @@
     <div class="read-intro bg-light">
         <i class="far fa-bookmark fa-3x"></i>
         <div class="row">
-            <div class="cover col-*">
+            <div class="cover col-4">
                 <img width="200" height="300" src="{{ manga.avatarLink }}" alt="">
             </div>
-            <div class="info col">
+            <div  class="info col">
                 <h2 class="head">{{ manga.title }}</h2>
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
-                            <th scope="row">Genre:</th>
-                            <td> {% for genre in manga.genres.all %} {{ genre.genreName }} {% endfor %} </td>
-                        </tr>
-                        <tr>
                             <th scope="row">Author:</th>
                             <td>{{ manga.author.authorName }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Genre:</th>
+                            <td> {% for genre in manga.genres.all %} {{ genre.genreName }} {% endfor %} </td>
                         </tr>
                         <!-- <tr>
                             <th scope="row">Update:</th>
@@ -37,11 +37,12 @@
                                     class="fa fa-star-half-alt fa-2x"></i> <span
                                     class="font-weight-bold ml-3">(10/9)</span></td>
                         </tr> -->
+                        <tr>
+                            <th scope="row">Description:</th>
+                            <td>{{ manga.description }}</td>
+                        </tr>
                     </tbody>
                 </table>
-                <p>
-                    {{ manga.description }}
-                </p>
             </div>
         </div>
     </div>

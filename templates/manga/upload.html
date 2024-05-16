@@ -7,6 +7,7 @@
 
 {% block content %}
 <div class="p-5">
+    <h1>Upload Manga</h1>
     <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
         <div class="form-group container">
             <div class="row">
@@ -30,8 +31,10 @@
                 {{ form.description.label_tag }}
                 {{ form.description }}
             </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 <!-- <script src="https://cdn.tiny.cloud/1/3eu37wok75co8wurx0fr06a9gk6y8x9x9m1z1xj8f72de8u5/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->

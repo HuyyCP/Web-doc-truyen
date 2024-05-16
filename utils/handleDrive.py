@@ -60,3 +60,7 @@ def upload_file_to_drive(file_path, folder_id=None, alter_filename=None):
     
     print('File uploaded successfully. File ID:', uploaded_file.get('id'))
     return uploaded_file.get('id')
+
+def delete_file_or_folder(id):
+    service.files().delete(fileId=id).execute()
+    print('File delete successfully.File ID:', id)

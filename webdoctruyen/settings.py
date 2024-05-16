@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_recaptcha',
 
     # own
+    "main",
     "users",
     "genre",
     "chapter",
