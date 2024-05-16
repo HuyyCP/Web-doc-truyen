@@ -35,4 +35,8 @@ class ChapterView:
             }
             return render(request, 'chapter/add-chapter.html', context)
 
+    def deleteChapter(self, request, slug, id):
+        chapterAPI.deleteChapter(id)
+        return redirect('edit-manga', slug=slug)
+    
 chapterView = ChapterView()

@@ -60,9 +60,11 @@ class MangaView:
             return redirect('manage')
         else: 
             form = EditMangaForm(instance=manga)
+            chapters = chapterAPI.getAllChaptersByManga(manga)
             context = {
                 'form': form, 
                 'manga': manga,
+                'chapters': chapters
             }
             return render(request, 'manga/edit_manga.html', context)
 

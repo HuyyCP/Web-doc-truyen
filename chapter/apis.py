@@ -3,11 +3,15 @@ from django.db.models import Max
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
-from utils.handleDrive import create_folder_in_drive, upload_file_to_drive
+from utils.handleDrive import create_folder_in_drive, upload_file_to_drive, delete_file_or_folder
 import tempfile
 
 
 class ChapterAPI:
+    def getAllChaptersByManga(self, manga):
+        data = Chapter.objects.filter(manga=manga)
+        return data
+
     def getChaptersByManga(self, manga_id, offset, limit):
         data = Chapter.objects.filter(manga_id=manga_id).order_by('index')[offset:offset+limit]
         return data
@@ -57,4 +61,9 @@ class ChapterAPI:
         )
         chapter.save()
 
+    def deleteChapter(self, chapter_id):
+        chapter = Chapter.objects.get(id=chapter_id)
+        delete_file_or_folder(chapter.idDrive)
+        chapter.delete()
+        
 chapterAPI = ChapterAPI()
