@@ -23,7 +23,7 @@ from main.views import home_view
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    # path("admin/", admin.site.urls),
     path("", include('chapter.urls'), name='chapter'),
     path("", home_view, name='home'),
     path("manga/", include('manga.urls'), name='manga'),

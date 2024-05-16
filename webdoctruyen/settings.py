@@ -36,7 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    # "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "author",
 ]
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -166,13 +166,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Emailing settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = 'dong.huynhquang21503@gmail.com'
-EMAIL_HOST_USER = 'dong.huynhquang21503@gmail.com'
-EMAIL_HOST_PASSWORD = 'xdgjhlvabwyfttfx'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 14400
 
