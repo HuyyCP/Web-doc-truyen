@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>{{ manga.title }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="p-5 container">
+    <div class="row">
+        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="form-group container">
+                <div class="row">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="row">
+                    {{ form.avatarInput.label_tag }}
+                    {{ form.avatarInput }}
+                </div>
+                <img id="avatarPreview" width="200" class="mb-4" src='{{ form.avatarLink.value }}'>
+                <div class="row">
+                    {{ form.author.label_tag }}
+                    {{ form.author }}
+                </div>
+                <div class="row hidden">
+                    {{ form.avatarLink.label_tag }}
+                    {{ form.avatarLink }}
+                </div>
+                <div class="row">
+                    {{ form.genres.label_tag }}
+                    {{ form.genres }}
+                </div>
+                <div class="row">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="row"><h3>List chapters</h3></div>
+    <div class="row">
+        <div style="height: 500px" class="container p-3 overflow-auto">
+            <div class="row">
+                <div class="col-1">Index</div>
+                <div class="col">Title</div>
+                <div class="col text-end">Control</div>
+            </div>
+            {% if chapters %}
+            {% for chapter in chapters %}
+                <div class="row m-2">
+                    <div class="col-1">
+                        {{ chapter.index }}
+                    </div>
+                    <div class="col">
+                        {{ chapter.title}}
+                    </div>
+                    <div class="col text-end">
+                        <a href="/manga/{{ manga.slug }}/chapter/{{ chapter.id }}/delete" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+                <div class="row text-center">No chapter</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const imgInput = document.querySelector("#id_avatarInput")
+    const displayImg = document.querySelector("#avatarPreview")
+    imgInput.addEventListener('change', () => {
+        displayImg.src = URL.createObjectURL(imgInput.files[0])
+        displayImg.classList.remove('hidden');
+    })
+
+</script>
+{% endblock %}

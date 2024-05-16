@@ -16,7 +16,9 @@ class MainView:
         for manga in mangas:
             totalChapters.append(chapterAPI.getNumOfChapterByManga(manga.id))
         context = {
-            'data': zip(mangas, totalChapters),
+            'mangas': mangas,
+            'totalChapters': totalChapters,
+            # 'data': zip(mangas, totalChapters),
         }
         return render(request, 'manage.html', context)
     

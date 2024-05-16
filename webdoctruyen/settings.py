@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     # own
     "users",
+    "main",
     "genre",
     "chapter",
     "manga",

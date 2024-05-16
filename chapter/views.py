@@ -12,7 +12,7 @@ class ChapterView:
             'chapter': chapter 
         }
         return render(request, 'chapter/chapter.html', context)
-
+    
     def addChapter(self, request, slug):
         manga = mangaAPI.getMangaBySlug(slug)
         if request.method == 'POST':
@@ -35,4 +35,8 @@ class ChapterView:
             }
             return render(request, 'chapter/add-chapter.html', context)
 
+    def deleteChapter(self, request, slug, id):
+        chapterAPI.deleteChapter(id)
+        return redirect('edit-manga', slug=slug)
+    
 chapterView = ChapterView()

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from manga.apis import mangaAPI
 from chapter.apis import chapterAPI
-from manga.forms import UploadMangaForm
+from manga.forms import UploadMangaForm, EditMangaForm
 
 class MangaView: 
     def getMangaBySlug(self, request, slug):
@@ -45,9 +45,31 @@ class MangaView:
             return render(request, 'manga/upload.html', context)
     
     def editManga(self, request, slug):
-        print()
+        manga = mangaAPI.getMangaBySlug(slug)
+        if request.method == "POST":
+            form = EditMangaForm(request.POST, request.FILES)
+            if form.is_valid():
+                print(form.cleaned_data)
+                newTitle = form.cleaned_data['title']
+                newAvatar = form.cleaned_data['avatarInput']
+                newGenres = form.cleaned_data['genres']
+                newDesc = form.cleaned_data['description']
+                mangaAPI.updateManga(manga, newTitle, newAvatar, newGenres, newDesc)
+            else :
+                print(form.errors)   
+            return redirect('manage')
+        else: 
+            form = EditMangaForm(instance=manga)
+            chapters = chapterAPI.getAllChaptersByManga(manga)
+            context = {
+                'form': form, 
+                'manga': manga,
+                'chapters': chapters
+            }
+            return render(request, 'manga/edit_manga.html', context)
 
     def deleteManga(self, request, id):
-        print()
+        mangaAPI.deleteManga(id)
+        return redirect('manage')
      
 mangaView = MangaView()
