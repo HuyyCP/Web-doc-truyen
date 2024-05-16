@@ -31,9 +31,10 @@ class MangaView:
                 avatar = form.cleaned_data['avatarInput']
                 author = form.cleaned_data['author']
                 genres = form.cleaned_data['genres']
-                description= form.cleaned_data['description']
+                description = form.cleaned_data['description']
+                uploader = request.user
                 
-                mangaAPI.createManga(title, avatar, author, genres, description)
+                mangaAPI.createManga(title, avatar, author, genres, description, uploader)
             else: 
                 print(form.errors)
             return redirect('manage')

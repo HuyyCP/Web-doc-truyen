@@ -24,7 +24,7 @@ class MangaAPI:
         data = Manga.objects.filter(uploader=uploader)
         return data
 
-    def createManga(self, title, avatar, author, genres, description):
+    def createManga(self, title, avatar, author, genres, description, uploader):
         slug = slugify(title)
         if isinstance(avatar, InMemoryUploadedFile):
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -42,7 +42,7 @@ class MangaAPI:
             description=description, 
             avatarLink=avatar_link, 
             idDrive=manga_folder_id, 
-            uploader=User.objects.get(id='1'), 
+            uploader=uploader, 
             author=author, 
         )
         manga.genres.set(genres)
