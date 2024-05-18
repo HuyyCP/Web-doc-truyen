@@ -25,4 +25,4 @@ urlpatterns = [
     path("manga/", include('manga.urls')),
     path("", include('users.urls')),
     path("", include('main.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

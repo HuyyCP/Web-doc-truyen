@@ -5,8 +5,12 @@ from chapter.apis import chapterAPI
 class MainView:
     def home_view(self, request):
         hotMangas = mangaAPI.getHotMangas()
+        totalChapters = []
+        for manga in hotMangas:
+            totalChapters.append(chapterAPI.getNumOfChapterByManga(manga.id))
         context = {
-            'mangas': hotMangas
+            'mangas': hotMangas,
+            'totalChapters': totalChapters,
         }
         return render(request, 'home.html', context)
     
