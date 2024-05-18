@@ -2,14 +2,17 @@ from django.shortcuts import render, redirect
 from chapter.apis import chapterAPI
 from manga.apis import mangaAPI
 from chapter.forms import AddChapterForm
+from django.views.generic import View
 
-class ChapterView:
+class ChapterView(View):
     def getChapterBySlugAndIndex(self, request, slug, index):
         manga = mangaAPI.getMangaBySlug(slug)
         chapter = chapterAPI.getChapterByIndex(manga.id, index)
+        totalChapters = chapterAPI.getNumOfChapterByManga(manga.id)
         context = {
             'manga': manga,
-            'chapter': chapter 
+            'chapter': chapter,
+            'totalChapters': totalChapters
         }
         return render(request, 'chapter/chapter.html', context)
     

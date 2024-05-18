@@ -6,13 +6,15 @@
 {% endblock %}
 
 {% block content %}
-
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 <div class="container my-5">
     <div class="read-intro bg-light">
         <i class="far fa-bookmark fa-3x"></i>
         <div class="row">
             <div class="cover col-4">
-                <img width="200" height="300" src="{{ manga.avatarLink }}" alt="">
+                <img width="80%" height="80%" src="{{ manga.avatarLink }}" alt="">
             </div>
             <div  class="info col">
                 <h2 class="head">{{ manga.title }}</h2>
@@ -55,7 +57,7 @@
                 {% for chapter in chapters %}
                 <tr>
                     <th><a href="/manga/{{ manga.slug }}/chapter-{{ chapter.index }}">Chapter {{ chapter.index }} </a></th>
-                    <td class="text-muted text-uppercase float-right">{{ chapter.uploadTime }}</td>
+                    <td class="text-muted text-uppercase float-right text-end">{{ chapter.uploadTime }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

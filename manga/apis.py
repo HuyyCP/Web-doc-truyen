@@ -23,7 +23,18 @@ class MangaAPI:
     def getMangaByUploader(self, uploader):
         data = Manga.objects.filter(uploader=uploader)
         return data
-
+    
+    def getMangasByFilters(self, genresIncluded, genresExcluded):
+        data = Manga.objects.all()
+        if genresIncluded != '':
+            genresIncluded = [int(num) for num in genresIncluded.split(",")]
+            for genre in genresIncluded:
+                data = data.filter(genres__id=genre)
+        if genresExcluded != '':
+            genresExcluded = [int(num) for num in genresExcluded.split(",")]
+            data = data.exclude(genres__id__in=genresExcluded)
+        return data
+            
     def createManga(self, title, avatar, author, genres, description, uploader):
         slug = slugify(title)
         if isinstance(avatar, InMemoryUploadedFile):
@@ -71,5 +82,7 @@ class MangaAPI:
         manga = Manga.objects.get(id=manga_id)
         delete_file_or_folder(manga.idDrive)
         manga.delete()
+
+    
 mangaAPI = MangaAPI()
     

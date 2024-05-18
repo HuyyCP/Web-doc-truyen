@@ -2339,4 +2339,18 @@ ol {
 	.anime__review__item__text {
 		padding: 18px 20px 20px;
 	}
+
 }
+
+span {
+	color: #ffffff;
+}
+
+.anime-details {
+	padding-bottom: 0px;
+}
+
+section.product.spad {
+	padding-top: 20px;
+}
+
