@@ -148,7 +148,7 @@ def password_change(request):
                 messages.error(request, error)
 
     form = SetPasswordForm(user)
-    return render(request, 'users/password_reset_confirm.html', {'form': form})
+    return render(request, 'users/password_change.html', {'form': form})
 
 @user_not_authenticated
 def password_reset_request(request):
