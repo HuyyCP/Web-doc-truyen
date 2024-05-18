@@ -13,31 +13,71 @@
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Homepage</a></li>
-                            <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                <ul class="dropdown">
-                                    <li><a href="./categories.html">Categories</a></li>
-                                    <li><a href="./anime-details.html">Anime Details</a></li>
-                                    <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                    <li><a href="./signup.html">Sign Up</a></li>
-                                    <li><a href="./login.html">Login</a></li>
+                            <li class="active"><a href="/">Homepage</a></li>
+                            <li><a href="#">Genres <span class="arrow_carrot-down"></span></a>
+                                <ul class="dropdown" style="width:30vw; ">
+                                    <li>
+                                        <div class="container"  style="display: flex; flex-wrap: wrap;">
+                                            <!-- <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5>
+                                            <h5 style="flex: 0 0 auto;" class="empty-box p-2">Cat1</h5> -->
+                                            
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
+                            <li class=""><a href="/manage">Manage</a></li>
+                            <li class=""><a href="/search">Advanced search</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="header__right">
-                    <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                    <a href="{% url 'login' %}"><span class="icon_profile"></span></a>
+                    <a href="/login" class="search-switch"><span>Login</span></a>
+                    <a href="/register"><span class="">Sign up</span></a>
                 </div>
             </div>
         </div>
         <div id="mobile-menu-wrap"></div>
     </div>
 </header>
+
+<script>
+    listGenresView = document.querySelector('.dropdown .container')
+    window.addEventListener('load', () => {
+        fetch('/genre/all')  
+        .then(response => response.text())
+        .then(result => {
+            result = JSON.parse(result)
+            genres = JSON.parse(result.genres)
+            console.log(genres)
+
+            genres.forEach((genre) => {
+                var g = document.createElement('a')
+                g.href = `/genre/${genre.fields.slug}`;
+                g.className = 'empty-box p-2';
+                g.setAttribute('style', 'flex: 0 0 auto; color:#000000;');
+                g.innerText = genre.fields.genreName;
+                console.log(g)
+                listGenresView.appendChild(g)
+            })
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    })
+
+</script>
 <!-- Header End -->

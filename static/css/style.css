@@ -1942,7 +1942,7 @@ ol {
 	position: absolute;
 	left: 50%;
 	top: -25px;
-	margin-left: -25px;
+	/* margin-left: -25px; */
 }
 
 .page-up a {

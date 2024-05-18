@@ -3,31 +3,32 @@
 
 {% block head %}
 <title>{{ manga.title }}</title>
+<link rel="stylesheet" href="{% static 'css/edit-manga.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
-<div class="overlay"><div class="progress-circle"></div></div>
-<form id="add-chapter-form" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-    <div class="form-group container mt-4 g-3">
-        <div class="row">
-            {{ form.title.label_tag }}
-            {{ form.title }}
-        </div>
-        <div class="row">
-            <label for="pagesInput">Pages</label>
-            <input id="pagesInput" name="files" class="form-control" type="file" accept="image/*" multiple>
-        </div>
-        <div class="row mt-3">
-            <div class="container" id="pagesPreview">
-                
+<div class="container pb-5">
+    <form id="add-chapter-form" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="form-group container mt-4 g-3">
+            <div class="row">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </div>
+            <div class="row">
+                <label for="pagesInput">Pages</label>
+                <input id="pagesInput" name="files" class="form-control" type="file" accept="image/*" multiple>
+            </div>
+            <div class="row mt-3">
+                <div class="container" id="pagesPreview">
+                    
+                </div>
+            </div>
+            <div class="row mt-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
             </div>
         </div>
-        <div class="row mt-3">
-            <button class="btn btn-primary" type="submit">Submit</button>
-        </div>
-    </div>
-</form>
-
+    </form>
+</div>
 <script>
     files = []
 

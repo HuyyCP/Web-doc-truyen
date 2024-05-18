@@ -30,9 +30,11 @@ class EditMangaForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         queryset=Genre.objects.all()
     )
+    author = forms.CharField(label='Author', required=False, disabled=True)
+    
     class Meta:
         model = Manga
-        fields = ['title', 'author', 'avatarLink', 'genres', 'description']
+        fields = ['title', 'avatarLink', 'genres', 'description']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -41,6 +43,10 @@ class EditMangaForm(forms.ModelForm):
             self.fields[field].widget.attrs['class'] = 'form-control mb-4'
         
         self.fields['genres'].widget.attrs['class'] = 'mb-4'
-        self.fields['author'].widget.attrs['disabled'] = True
-        self.fields['author'].required = False
+        # self.fields['author'].widget.attrs['disabled'] = True
+        # self.fields['author'].required = False
 
+        instance = kwargs.get('instance')
+        if instance and instance.author:
+            self.fields['author'].initial = instance.author
+        print(instance.author)

@@ -10,7 +10,7 @@
 {% block content %}
 {% include 'manga/manga-brief.html' %}
 
-<div class="container p-5" style="width:80vw">
+<div class="container p-5" style="width:80vw; height: 80vh;">
     <div class="row" style="width:100%;">
         <div class="input-group mb-3" style="width:100%;">
             <form action="/search" method="POST" id="searchForm"> {% csrf_token %}
@@ -91,8 +91,6 @@
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
     });
-
-
 
 
 
