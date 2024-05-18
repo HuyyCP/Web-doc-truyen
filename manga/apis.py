@@ -13,7 +13,7 @@ env.read_env('.env')
 class MangaAPI:
 
     def getHotMangas(self):
-        data = Manga.objects.all()
+        data = Manga.objects.all()[:8]
         return data
 
     def getMangaBySlug(self, slug):
