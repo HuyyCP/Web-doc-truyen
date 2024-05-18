@@ -159,21 +159,21 @@ LOGIN_URL = 'login'
 
 AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
-RECAPTCHA_PUBLIC_KEY = '6Lf_BtgpAAAAAGFodUDSjBHcLIcEcl6NUPJewxh9'
-RECAPTCHA_PRIVATE_KEY = '6Lf_BtgpAAAAAIsuQWrnFTA-HsSKraKQgF2NhCYt'
-SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
+SILENCED_SYSTEM_CHECKS = env('SILENCED_SYSTEM_CHECKS')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Emailing settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = 'dong.huynhquang21503@gmail.com'
-EMAIL_HOST_USER = 'dong.huynhquang21503@gmail.com'
-EMAIL_HOST_PASSWORD = 'xdgjhlvabwyfttfx'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_FROM = env('EMAIL_FROM')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 PASSWORD_RESET_TIMEOUT = 14400
 

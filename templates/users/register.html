@@ -1,24 +1,58 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form|crispy }}
-            </fieldset>
-
-            By registering, you accept the Terms of Service and Privacy Notice
-
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="../static/img/normal-breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Sign Up</h2>
+                    <p>Welcome to the official Anime blog.</p>
+                </div>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="/login">Sign In</a>
-            </small>
         </div>
     </div>
+</section>
+<!-- Normal Breadcrumb End -->
+
+<!-- Signup Section Begin -->
+<section class="signup spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login__form">
+                    <h3>Sign Up</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input__item">
+                            {{ form.email }}
+                            <span class="icon_mail"></span>
+                        </div>
+                        <div class="input__item">
+                            {{ form.username }}
+                            <span class="icon_profile"></span>
+                        </div>
+                        <div class="input__item">
+                            {{ form.password1 }}
+                            <span class="icon_lock"></span>
+                        </div>
+                        <div class="input__item">
+                            {{ form.password2 }}
+                            <span class="icon_lock"></span>
+                        </div>
+                        <button type="submit" class="site-btn">Sign Up</button>
+                    </form>                    
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login__register">
+                    <h3>Already have an account?</h3>
+                    <a href="{% url 'login' %}" class="primary-btn">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Signup Section End -->
 {% endblock content %}
