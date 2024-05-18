@@ -39,7 +39,7 @@ class UserLoginForm(AuthenticationForm):
         attrs={'class': 'form-control', 'placeholder': 'Username or Email'}),
         label="Username or Email*")
 
-        password = forms.CharField(widget=forms.PasswordInput(
+    password = forms.CharField(widget=forms.PasswordInput(
 
         attrs={'class': 'form-control', 'placeholder': 'Password'}))   
 

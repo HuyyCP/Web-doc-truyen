@@ -3,10 +3,10 @@
 
 {% block head %}
 <title>{{ manga.title }}</title>
+<link rel="stylesheet" href="{% static 'css/edit-manga.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
-<div class="overlay"><div class="progress-circle"></div></div>
 <div class="p-5 container">
     <div class="row">
         <form method="POST" enctype="multipart/form-data"> {% csrf_token %}

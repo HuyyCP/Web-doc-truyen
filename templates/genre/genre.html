@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load custom_template %}
+{% load static %}
+
+
+{% block head %}
+<title>Genre</title>
+{% endblock %}
+
+{% block content %}
+{% include 'manga/manga-brief.html' %}
+
+<div class="container p-5">
+    <div class="row mb-5">
+        <h3><span>{{ genre }}</span></h3>
+    </div>
+    <div class="row">
+        <div class="container" style="display:flex; flex-wrap: wrap;">
+            {% for manga, totalChapter in mangas|zip:totalChapters %}
+                <div class="col-lg-3 col-md-6 col-sm-6" style="flex: 0 0 auto">
+                    <div class="product__item">
+                        <a href="/manga/{{ manga.slug }}">
+                            <div class="product__item__pic set-bg" data-setbg="{{ manga.avatarLink }}">
+                                <div class="ep">{{ totalChapter }} chapters</div>
+                                <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            </div>
+                        </a>
+                        <div class="product__item__text">
+                            <!-- <ul>
+                                <li>Active</li>
+                                <li>Movie</li>
+                            </ul> -->
+                            <h5><a href="/manga/{{ manga.slug }}">{{ manga.title }}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+        $('.set-bg').each(function () {
+            var bg = $(this).data('setbg');
+            $(this).css('background-image', 'url(' + bg + ')');
+        });
+    })
+</script>
+
+{% endblock %}
