@@ -6,11 +6,22 @@ from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(help_text='A valid email address, please.', required=True)
+    email = forms.EmailField(help_text='A valid email address, please.', required=True,
+                            widget=forms.TextInput(
+                            attrs={'class': 'form-control', 'placeholder': 'Email'}))
 
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Username'}))
+
+    password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Password'}))   
+
+    password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}))  
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
@@ -28,10 +39,10 @@ class UserLoginForm(AuthenticationForm):
         attrs={'class': 'form-control', 'placeholder': 'Username or Email'}),
         label="Username or Email*")
 
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'placeholder': 'Password'}))
+        password = forms.CharField(widget=forms.PasswordInput(
 
-    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+        attrs={'class': 'form-control', 'placeholder': 'Password'}))   
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
@@ -44,9 +55,17 @@ class SetPasswordForm(SetPasswordForm):
     class Meta:
         model = get_user_model()
         fields = ['new_password1', 'new_password2']
+    
+    new_password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'New Password'})) 
+    
+    new_password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Confirm New Password'})) 
 
 class PasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
-
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+    
+    email = forms.EmailField(required=True,
+                            widget=forms.TextInput(
+                            attrs={'class': 'form-control', 'placeholder': 'Email'}))
