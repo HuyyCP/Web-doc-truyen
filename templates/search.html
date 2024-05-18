@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+
+
+{% block head %}
+<title>Search</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'manga/manga-brief.html' %}
+
+<div class="container p-5" style="width:80vw; height: 80vh;">
+    <div class="row" style="width:100%;">
+        <div class="input-group mb-3" style="width:100%;">
+            <form action="/search" method="POST" id="searchForm"> {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary" type="submit" aria-expanded="false"><i class="fas fa-search"></i> Search</button>
+                <!-- <input type="hidden" name="genresIncluded">
+                <input type="hidden" name="genresExcluded"> -->
+            </form>
+            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#filter-pane" aria-expanded="false" aria-controls="filter-pane">
+                <i class="fas fa-filter"></i> Filter
+            </button>
+            <div class="collapse m-2" id="filter-pane" style="width:100%;">
+                <div style="width:100%;" class="border border-secondary rounded p-3 container">
+                    <div class="row text-start">
+                        <div class="col">
+                            <h3><span>Genres</span></h3>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-secondary" id="resetFilter">Reset</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="list-genres">
+                            {% for genre in genres %}
+                                <span data-id="{{ genre.id }}" class="genre-item empty-box">{{ genre }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="width:100%;">
+        <!-- <div class="container list-mangas" id="result-pane">
+            {% for manga in mangas %}
+                <div class="manga-item">{{ manga.title }}</div>
+            {% endfor %}
+        </div> -->
+        <section class="product spad">
+            <div class="container">
+                <div class="row"><h2><strong><span>Result</span></h2></strong></div>
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="trending__product list-mangas">
+                            <!-- <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <div class="section-title">
+                                        <h4>Trending Now</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="btn__all">
+                                        <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="row">
+                                
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+<script>
+    
+    /*------------------
+        Background Set
+    --------------------*/
+    $('.set-bg').each(function () {
+        var bg = $(this).data('setbg');
+        $(this).css('background-image', 'url(' + bg + ')');
+    });
+
+
+
+</script>
+{% endblock %}

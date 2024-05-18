@@ -2045,7 +2045,7 @@ ol {
 	position: absolute;
 	left: 50%;
 	top: -25px;
-	margin-left: -25px;
+	/* margin-left: -25px; */
 }
 
 .page-up a {
@@ -2442,6 +2442,7 @@ ol {
 	.anime__review__item__text {
 		padding: 18px 20px 20px;
 	}
+
 }
 
 .profile-image {
@@ -2449,3 +2450,20 @@ ol {
     height: 125px;
     padding: 5px;
 }
+
+
+
+
+span {
+	color: #ffffff;
+}
+
+.anime-details {
+	padding-bottom: 0px;
+}
+
+section.product.spad {
+	padding-top: 20px;
+}
+
+

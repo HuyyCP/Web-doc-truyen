@@ -3,8 +3,9 @@ from django.contrib import messages
 from manga.apis import mangaAPI
 from chapter.apis import chapterAPI
 from manga.forms import UploadMangaForm, EditMangaForm
+from django.views.generic import View
 
-class MangaView: 
+class MangaView(View): 
     def getMangaBySlug(self, request, slug):
         return self.getMangaBySlugAndPage(request, slug, 1)
 
@@ -20,13 +21,12 @@ class MangaView:
             'totalChapter': totalChapter,
             'pageNum': pageNum
         }
-        return render(request, 'manga/manga_detail.html', context)
+        return render(request, 'manga/manga_detail_remake.html', context)
     
     def uploadMangaView(self, request):
         if request.method == "POST":
             form = UploadMangaForm(request.POST, request.FILES)
             if form.is_valid():
-                print(form.cleaned_data)
                 title = form.cleaned_data['title']
                 avatar = form.cleaned_data['avatarInput']
                 author = form.cleaned_data['author']

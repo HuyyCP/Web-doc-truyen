@@ -1,14 +1,58 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head %}
 <title>{{ manga.title }} - chapter {{ chapter.info.index }}</title>
 {% endblock %}
 {% block content %}
-<h1>{{ manga.title }} - chapter {{ chapter.info.index }}</h1>
+<div class="m-3">
+    <h1><a href="/manga/{{ manga.slug }}"><span>{{ manga.title }}</span></a><span> - chapter {{ chapter.info.index }} </span></h1>
+</div>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% if chapter.info.index > 1 %}
+                <a class="btn btn-secondary" href="/manga/{{ manga.slug }}/chapter-{{ chapter.info.index|add:'-1' }}"><i class="fas fa-chevron-left"></i> Previous chapter</a>
+            {% endif %}
+        </div>
+        <div class="col text-end">
+            {% if chapter.info.index < totalChapters %}
+                <a class="btn btn-secondary"  href="/manga/{{ manga.slug }}/chapter-{{ chapter.info.index|add:1 }}"><i class="fas fa-chevron-right"></i> Next chapter</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<br>
 
 <div style="text-align: center;">
     {% for page in chapter.pages %}
-    <img style="width: 50vw;" src="{{ page.link }}" alt="{{ page.name }}">
+        {% if forloop.counter <= 3 %}
+            <img style="width: 50vw;" src="{{ page.link }}" alt="{{ page.name }}">
+        {% else %}
+            <img class="lazy hidden" style="width: 50vw;" data-src="{{ page.link }}" alt="{{ page.name }}">
+        {% endif %}
     {% endfor %}
 </div>
+
+<br>
+<div class="container mb-3">
+    <div class="row">
+        <div class="col">
+            {% if chapter.info.index > 1 %}
+                <a class="btn btn-secondary" href="/manga/{{ manga.slug }}/chapter-{{ chapter.info.index|add:'-1' }}"><i class="fas fa-chevron-left"></i> Previous chapter</a>
+            {% endif %}
+        </div>
+        <div class="col text-end">
+            {% if chapter.info.index < totalChapters %}
+                <a class="btn btn-secondary"  href="/manga/{{ manga.slug }}/chapter-{{ chapter.info.index|add:1 }}"><i class="fas fa-chevron-right"></i> Next chapter</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'js/lazyLoad.js' %}"></script>
 {% endblock %}

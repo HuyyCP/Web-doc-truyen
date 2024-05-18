@@ -1,0 +1,43 @@
+.list-genres, .list-mangas {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-genres > .genre-item, .list-mangas > .manga-item {
+  flex: 0 0 auto;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 12px;
+  user-select: none;
+}
+
+.list-genres > .genre-item {
+  font-weight: 600;
+}
+
+.empty-box {
+  border: 1px solid black;
+  width: fit-content;
+  height: fit-content;
+  display: block;
+  background-color: #ffffff; 
+  color: #000000;
+}
+  
+.tick-box {
+  border: 1px solid #00ff00;
+  width: fit-content;
+  height: fit-content;
+  display: block;
+  background-color: #ffffff; 
+  color: #00ff00;
+}
+
+.cross-box {
+  border: 1px dashed #ff0000;
+  width: fit-content;
+  height: fit-content;
+  display: block;
+  background-color: #ffffff; 
+  color: #ff0000;
+}

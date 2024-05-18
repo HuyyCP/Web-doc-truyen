@@ -40,7 +40,9 @@ class UserLoginForm(AuthenticationForm):
         label="Username or Email*")
 
     password = forms.CharField(widget=forms.PasswordInput(
+
         attrs={'class': 'form-control', 'placeholder': 'Password'}))   
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
