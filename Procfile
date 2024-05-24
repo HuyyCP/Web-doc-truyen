@@ -1,6 +1,8 @@
 web: gunicorn webdoctruyen.wsgi
 
 setup:
-  - sudo apt-get update
-  - sudo apt-get install -y pkg-config
-  - sudo apt-get install -y python3-dev default-libmysqlclient-dev build-essential
+  apt-get update
+  apt-get install -y pkg-config
+  apt-get install -y python3-dev 
+  apt-get install -y default-libmysqlclient-dev 
+  apt-get install -y build-essential
