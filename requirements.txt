@@ -19,6 +19,7 @@ gunicorn==22.0.0
 httplib2==0.22.0
 idna==3.7
 image==1.5.33
+mysqlclient==2.2.4
 oauthlib==3.2.2
 packaging==24.0
 pillow==10.3.0
