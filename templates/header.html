@@ -45,8 +45,19 @@
             </div>
             <div class="col-lg-2">
                 <div class="header__right">
-                    <a href="/login" class="search-switch"><span>Login</span></a>
-                    <a href="/register"><span class="">Sign up</span></a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profile' user.username %}" class="search-switch">
+                            <span>{{user.username}} </span>
+                        </a>
+                        <a href="{% url 'logout' %}">
+                            <span>Log out</span>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="search-switch"><span>Login</span></a>
+                        <a href="{% url 'register' %}"><span class="">Sign up</span></a>
+                    {% endif %}
+                    <!-- <a href="/login" class="search-switch"><span>Login</span></a>
+                    <a href="/register"><span class="">Sign up</span></a> -->
                 </div>
             </div>
         </div>

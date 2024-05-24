@@ -1929,7 +1929,7 @@ ol {
 
 .pass__form {
 	position: relative;
-	padding-left: 412px;
+	/* padding-left: 412px; */
 }
 
 .pass__form:after {
