@@ -5,5 +5,3 @@ credentials.*
 package.json
 package-lock.json
 node_modules
-Procfile
-requirements.txt
