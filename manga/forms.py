@@ -49,4 +49,4 @@ class EditMangaForm(forms.ModelForm):
         instance = kwargs.get('instance')
         if instance and instance.author:
             self.fields['author'].initial = instance.author
-        print(instance.author)
+    
